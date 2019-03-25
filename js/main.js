@@ -1,5 +1,9 @@
 let game;
 let character;
+let winner;
+let bad;
+let neutral;
+let currentMove = null;
 let validMove = null;
 
 
@@ -52,7 +56,7 @@ class BadTile{
 
   message(){
     this.message.innerHTML = `${this.name} found a trap!`;
-    this.lives--;
+    character.lives--;
     checkEndConditions();
   }
 }
@@ -131,17 +135,19 @@ class FarmGame{
   }
 
   placeWinningTile(){
+    winner = new WinningTile;
     let x = Math.floor(Math.random() * Math.floor(3));
     let y = Math.floor(Math.random() * Math.floor(3));
-    this.gameState[x][y] = new WinningTile;
+    this.gameState[x][y] = winner;
   }
 
   placeBadTiles(){
+    bad = new BadTile;
     for(let i = 0; i < 3; i++){
       let x = Math.floor(Math.random() * Math.floor(3));
       let y = Math.floor(Math.random() * Math.floor(3));
       if(this.gameState[x][y] === null){
-        this.gameState[x][y] = new BadTile;
+        this.gameState[x][y] = bad;
       }
       else{
         i--;
@@ -150,10 +156,11 @@ class FarmGame{
   }
 
   placeNeutralTiles(){
+    neutral = new NeutralTile;
     for(let x = 0; x <3; x++){
       for(let y = 0; y < 3; i++){
         if(this.gameState[x][y] === null){
-          this.gameState[x][y] = new NeutralTile;
+          this.gameState[x][y] = neutral;
         }
       }
     }
@@ -163,7 +170,22 @@ class FarmGame{
     this.setUpBoard();
   }
 
-  recordMove(){
+  recordMove(event){
+    let tile_x = event.target.dataset.x;
+    let tile_y = event.target.dataset.y; 
+    if(this.gameState[tile_x][tile_y] === 'checked'){
+      validMove = false;
+    } else {
+        validMove = true;
+        if(this.gameState[tile_x][tile_y] === winner){
+          currentMove = 'winner';
+        }else if (this.gameState[tile_x][tile_y] === bad){
+          currentMove = 'bad';
+        }else{
+          currentMove = 'neutral';
+        }
+        this.gameState[tile_x][tile_y] = 'checked';
+    }
 
   }
 } //end class FarmGame
@@ -204,8 +226,13 @@ function handleMove(event){
   game.recordMove(event);
   if (validMove === false){ // if player clicked a played tile, alert and let them try again
     alert(`Error: ${character.name} already checked that spot. Please pick another tile.`)
-    game.recordMove(event);
   } else {
-    //
+      if (currentMove === 'winner'){
+
+      }else if (currentMove === 'bad'){
+
+      }else {
+        
+      }
   }
 }
