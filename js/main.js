@@ -57,6 +57,17 @@ class BadTile{
   }
 }
 
+class NeutralTile{
+  constructor(){
+    this.name = character.name;
+    this.message = document.querySelector('#message');
+  }
+
+  message(){
+    this.message.innerHTML = `${this.name} found nothing.`;
+  }
+}
+
 class WinningTile{
   constructor(){
     this.name = character.name;
@@ -113,11 +124,47 @@ class FarmGame{
       }
       this.gameboard.appendChild(newRow);
     }
+    this.placeWinningTile();
+    this.placeBadTiles();
+    this.placeNeutralTiles();
     this.setUpTileListeners();
+  }
+
+  placeWinningTile(){
+    let x = Math.floor(Math.random() * Math.floor(3));
+    let y = Math.floor(Math.random() * Math.floor(3));
+    this.gameState[x][y] = new WinningTile;
+  }
+
+  placeBadTiles(){
+    for(let i = 0; i < 3; i++){
+      let x = Math.floor(Math.random() * Math.floor(3));
+      let y = Math.floor(Math.random() * Math.floor(3));
+      if(this.gameState[x][y] === null){
+        this.gameState[x][y] = new BadTile;
+      }
+      else{
+        i--;
+      }
+    }
+  }
+
+  placeNeutralTiles(){
+    for(let x = 0; x <3; x++){
+      for(let y = 0; y < 3; i++){
+        if(this.gameState[x][y] === null){
+          this.gameState[x][y] = new NeutralTile;
+        }
+      }
+    }
   }
 
   start(){
     this.setUpBoard();
+  }
+
+  recordMove(){
+
   }
 } //end class FarmGame
 
@@ -153,5 +200,12 @@ function applyEventListeners(){
   }
 }
 
-
- 
+function handleMove(event){
+  game.recordMove(event);
+  if (validMove === false){ // if player clicked a played tile, alert and let them try again
+    alert(`Error: ${character.name} already checked that spot. Please pick another tile.`)
+    game.recordMove(event);
+  } else {
+    //
+  }
+}
