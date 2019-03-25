@@ -11,13 +11,15 @@ class Character{
     this.avatar = document.querySelector('select[name="character"]');
     this.avatarChosen = document.querySelector('#avatar-chosen');
     this.expression = document.querySelector('#expression');
-    this.name = document.querySelector('input[name="character-name"]');
+    this.characterName = document.querySelector('input[name="character-name"]');
+    this.name = 'Mr. Fluffles'; 
     this.characterMaker = document.querySelector('#character-maker');
     this.goal = null;
     this.lives = 3; 
   }
 
   setAvatar(){
+    this.name = this.characterName.value;
     if(this.avatar.value === 'puppy'){
       this.avatarChosen.setAttribute('class','puppy');
       this.expression.setAttribute('class', 'neutral');
@@ -130,15 +132,15 @@ document.addEventListener('DOMContentLoaded', function(event){
     character.characterMaker.setAttribute('class','');
     character.avatarChosen.setAttribute('class','puppy');
     character.expression.setAttribute('class','neutral');
-
   });
 });
 
 // Play Game
 let playGame = document.querySelector('#play-game');
 playGame.addEventListener('click', function(event){
-  game = new FarmGame();
-  game.start();
+  console.log(character.name);
+  //game = new FarmGame();
+  //game.start();
 });
 
 // Update Character Avatar
