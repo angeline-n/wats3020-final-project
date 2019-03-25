@@ -28,6 +28,43 @@
 </head>
 
 <body>
+
+  <div id="landing">
+        <p><button id="start-button" class="btn btn-primary">Start Game</button></p>
+  </div>
+
+  <div id="character-maker" class="hidden">
+      <p>
+        <label for="character">Character</label>
+        <select name="character">
+          <option value="bunny">Bunny</option>
+          <option value="puppy" selected="selected">Puppy</option>
+        </select>
+      </p>
+
+    <div id="avatar-chosen"></div>
+    <div id="expression"></div>
+
+    <div>
+      <p><button id="play-game" class="btn btn-primary">Play Game</button></p>
+    </div>
+
+  </div>
+
+  <div class="col-lg-9 col-xs hidden" id="gameboard">
+
+  </div>
+
+  <div id="win-screen" class="hidden">
+    <div class="container">
+        <h2><i id="winner-token"></i>You Won!</h2>
+    </div>
+  </div>
+  <div id="lose-screen" class="hidden">
+    <div class="container">
+      <h2>You Lost</h2>
+    </div>
+  </div>
  
 </body>
 
