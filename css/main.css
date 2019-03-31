@@ -1,11 +1,41 @@
 /* Main Styles */
 
+body{
+  width: 90%;
+  margin: auto;
+}
+
 .hidden {
     display: none;
 }
 
-/* Bunny Avatar */
+/* Tiles */
+#gameboard {
+  background-color: rgba(253, 255, 252, 0.1);
+  padding: 0;
+}
+#gameboard .row div {
+  text-align: center;
+}
+#gameboard div.col-xs-3 {
+  width: 33%;
+}
+.tile {
+  background: rgba(33, 34, 32);
+  width: 100%;
+  min-width: 75px;
+  height: 100%;
+  min-height: 75px;
+  border: 1px solid blue;
+  display: inline-block;
+  font-size: 5rem;
+  cursor: pointer;
+}
+.tile:hover {
+  background: rgba(65, 77, 60, 0.1);
+}
 
+/* Bunny Avatar */
 .bunny {
     width: 100px;
     height: 100px;
@@ -19,7 +49,6 @@
         200px 190px 1px 20px darkgray;
     position: absolute;
 }
-
 .bunny::before {
     content: '';
     width: 50px;
@@ -33,7 +62,6 @@
         260px 58px 0 0 lightgray;
     z-index: -1;
 }
-
 .bunny::after {
     content: '';
     margin-left: 235px;
@@ -46,7 +74,6 @@
 }
 
 /* Puppy Avatar */
-
 .puppy {
     width: 100px;
     height: 100px;
