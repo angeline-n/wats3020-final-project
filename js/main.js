@@ -1,11 +1,9 @@
 let game;
 let character;
 let winner;
-let bad;
 let neutral;
-let currentMove = null;
-let validMove = null;
-
+let badTile1, badTile2, badTile3;
+let badTiles;
 
 
 // Avatar Creation and Customization
@@ -54,12 +52,13 @@ class BadTile{
     this.message = document.querySelector('#message');
   }
 
-  message(){
+  displayMessage(){
     this.message.innerHTML = `${this.name} found a trap!`;
     character.lives--;
     checkEndConditions();
   }
 }
+
 
 class NeutralTile{
   constructor(){
@@ -67,7 +66,7 @@ class NeutralTile{
     this.message = document.querySelector('#message');
   }
 
-  message(){
+  displayMessage(){
     this.message.innerHTML = `${this.name} found nothing.`;
   }
 }
@@ -79,7 +78,7 @@ class WinningTile{
     this.message = document.querySelector('#message')
   }
 
-  message(){
+  displayMessage(){
     this.message.innerHTML = `${this.name} found the ${this.goal}!`;
   }
 }
@@ -125,16 +124,18 @@ class FarmGame{
         newTile.setAttribute('data-y', j);
         newCol.appendChild(newTile);
         newRow.appendChild(newCol);
-      }
+      } 
       this.gameboard.appendChild(newRow);
     }
     this.placeWinningTile();
     this.placeBadTiles();
     this.placeNeutralTiles();
     this.setUpTileListeners();
+    console.log(this.gameState);
   }
 
   placeWinningTile(){
+    character.setGoal();
     winner = new WinningTile;
     let x = Math.floor(Math.random() * Math.floor(3));
     let y = Math.floor(Math.random() * Math.floor(3));
@@ -142,12 +143,15 @@ class FarmGame{
   }
 
   placeBadTiles(){
-    bad = new BadTile;
+  badTile1 = new BadTile;
+  badTile2 = new BadTile;
+  badTile3 = new BadTile;
+  badTiles = [badTile1, badTile2, badTile3];
     for(let i = 0; i < 3; i++){
       let x = Math.floor(Math.random() * Math.floor(3));
       let y = Math.floor(Math.random() * Math.floor(3));
       if(this.gameState[x][y] === null){
-        this.gameState[x][y] = bad;
+        this.gameState[x][y] = badTiles[i];
       }
       else{
         i--;
@@ -158,7 +162,7 @@ class FarmGame{
   placeNeutralTiles(){
     neutral = new NeutralTile;
     for(let x = 0; x <3; x++){
-      for(let y = 0; y < 3; i++){
+      for(let y = 0; y < 3; y++){
         if(this.gameState[x][y] === null){
           this.gameState[x][y] = neutral;
         }
@@ -167,27 +171,13 @@ class FarmGame{
   }
 
   start(){
+    this.gameboard.setAttribute('class', 'col-lg-9 col-xs');
     this.setUpBoard();
   }
+  
 
-  recordMove(event){
-    let tile_x = event.target.dataset.x;
-    let tile_y = event.target.dataset.y; 
-    if(this.gameState[tile_x][tile_y] === 'checked'){
-      validMove = false;
-    } else {
-        validMove = true;
-        if(this.gameState[tile_x][tile_y] === winner){
-          currentMove = 'winner';
-        }else if (this.gameState[tile_x][tile_y] === bad){
-          currentMove = 'bad';
-        }else{
-          currentMove = 'neutral';
-        }
-        this.gameState[tile_x][tile_y] = 'checked';
-    }
 
-  }
+
 } //end class FarmGame
 
 
@@ -207,10 +197,42 @@ document.addEventListener('DOMContentLoaded', function(event){
 // Play Game
 let playGame = document.querySelector('#play-game');
 playGame.addEventListener('click', function(event){
-  console.log(character.name);
-  //game = new FarmGame();
-  //game.start();
+  character.characterMaker.setAttribute('class','hidden');
+  playGame.setAttribute('class','hidden');
+  game = new FarmGame();
+  game.start();
 });
+
+function handleMove(event){
+  let tile_x = event.target.dataset.x;
+  let tile_y = event.target.dataset.y; 
+  if(game.gameState[tile_x][tile_y] === 'checked'){
+    alert(`Error: ${character.name} already checked that spot. Please pick another tile.`)
+  } else {
+      validMove = true;
+      if(game.gameState[tile_x][tile_y] === winner){
+        console.log(`winner`);
+        winner.displayMessage();
+      }else if (game.gameState[tile_x][tile_y] === badTile1 || game.gameState[tile_x][tile_y] === badTile2 || game.gameState[tile_x][tile_y] === badTile3){
+        console.log(`bad`);
+        currentBadTile = game.gameState[tile_x][tile_y];
+        currentBadTile.displayMessage();
+      }else{
+        game.gameState[tile_x][tile_y].displayMessage();
+        console.log(`neutral`);
+      }
+      game.gameState[tile_x][tile_y] = 'checked';
+      console.log(`${game.gameState}`);
+  }
+}
+
+function checkEndConditions(){
+  if (character.lives === 0){
+    console.log(`game over`);
+  } else{
+    return;
+  }
+}
 
 // Update Character Avatar
 function applyEventListeners(){
@@ -222,17 +244,3 @@ function applyEventListeners(){
   }
 }
 
-function handleMove(event){
-  game.recordMove(event);
-  if (validMove === false){ // if player clicked a played tile, alert and let them try again
-    alert(`Error: ${character.name} already checked that spot. Please pick another tile.`)
-  } else {
-      if (currentMove === 'winner'){
-
-      }else if (currentMove === 'bad'){
-
-      }else {
-        
-      }
-  }
-}
