@@ -1,27 +1,32 @@
 /* Main Styles */
-
 body{
   width: 90%;
   margin: auto;
   font-family: 'Reem Kufi', sans-serif;
 }
-
 .hidden {
-    display: none;
+  display: none;
 }
 
-.shown {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100vw;
-  min-height: 100vw;
-  z-index: 1000;
+/* Landing Styles */
+#landing{
+  text-align: center;
+}
+#description{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+.carousel-indicators li{
+  background-color: #000 !important;
 }
 
 /* Tiles */
-
 #gameboard {
   padding: 0;
   margin-right: 4rem;
@@ -48,95 +53,122 @@ body{
 }
 
 /* Character Maker */
-
 .character-options{
   margin-top: 10rem;
 }
 
 /* Game Play */
-
-#game{
+#game-container{
   margin-top: 5rem;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
+.spaced {
+  margin-top: 15rem !important;
+}
 #avatar-container{
   margin-top: -5rem;
 }
-
 #message{
   margin-top: 22rem;
   font-family: 'Source Code Pro', monospace;
 }
 
+/* Win/Lose Screen */
+.shown {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vw;
+  z-index: 1000;
+}
 #win-screen .container{
   background: #CDF6F6;
   color: rgba(10, 46, 54, 1);
+  border: 1px solid black;
   padding: 1rem;
   margin-top: 1rem;
   text-align: center;
 }
-
 #lose-screen .container {
   background:#A3AF9E;
   color: rgba(10, 46, 54, 1);
+  border: 1px solid black;
   padding: 1rem;
   margin-top: 1rem;
   text-align: center;
 }
+#win-screen h2, #lose-screen h2{
+  border-bottom: 1px solid black;
+  padding-bottom: 1 rem;
+  margin-bottom: 2rem;
+}
+#win-screen button:first-child, #lose-screen button:first-child{
+  margin-right: 2rem;
+}
+#share{
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+#share i:first-child, #share i:nth-child(2){
+  margin-right: 2rem;
+} 
 
 /* Bunny Avatar */
 .bunny {
-    width: 100px;
-    height: 100px;
-    margin-left: -100px;
-    border-radius: 50%;
-    color: lightgray;
-    box-shadow:
-        230px 180px 0 -40px black,
-        170px 180px 0 -40px black,
-        200px 180px 20px 2px lightgray,
-        200px 190px 1px 20px darkgray;
-    position: absolute;
+  width: 100px;
+  height: 100px;
+  margin-left: -100px;
+  border-radius: 50%;
+  color: lightgray;
+  box-shadow:
+    230px 180px 0 -40px black,
+    170px 180px 0 -40px black,
+    200px 180px 20px 2px lightgray,
+    200px 190px 1px 20px darkgray;
+  position: absolute;
 }
 .bunny::before {
-    content: '';
-    width: 50px;
-    height: 150px;
-    border-radius: 50% 50% 20% 50%;
-    position: absolute;
-    box-shadow:
-        185px 70px 12px -16px darkgray,
-        265px 70px 12px -16px darkgray,
-        190px 60px 0 0 lightgray,
-        260px 58px 0 0 lightgray;
-    z-index: -1;
+  content: '';
+  width: 50px;
+  height: 150px;
+  border-radius: 50% 50% 20% 50%;
+  position: absolute;
+  box-shadow:
+    185px 70px 12px -16px darkgray,
+    265px 70px 12px -16px darkgray,
+    190px 60px 0 0 lightgray,
+    260px 58px 0 0 lightgray;
+  z-index: -1;
 }
 .bunny::after {
-    content: '';
-    margin-left: 235px;
-    margin-top: 240px;
-    border-radius: 37% 37% 0 0;
-    border-left: 13px solid transparent;
-    border-right: 13px solid transparent;
-    border-top: 20px solid rgb(249, 127, 192, 0.9);
-    position: absolute;
+  content: '';
+  margin-left: 235px;
+  margin-top: 240px;
+  border-radius: 37% 37% 0 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 20px solid rgb(249, 127, 192, 0.9);
+  position: absolute;
 }
 
 /* Puppy Avatar */
 .puppy {
-    width: 100px;
-    height: 100px;
-    margin-left: -100px;
-    border-radius: 50%;
-    color: lightgray;
-    box-shadow:
-        230px 180px 0 -40px black,
-        170px 180px 0 -40px black,
-        200px 180px 20px 2px chocolate,
-        200px 190px 1px 20px saddlebrown;
-    position: absolute;
+  width: 100px;
+  height: 100px;
+  margin-left: -100px;
+  border-radius: 50%;
+  color: lightgray;
+  box-shadow:
+    230px 180px 0 -40px black,
+    170px 180px 0 -40px black,
+    200px 180px 20px 2px chocolate,
+    200px 190px 1px 20px saddlebrown;
+  position: absolute;
 }
-
 .puppy::before {
     content: '';
     width: 60px;
@@ -149,124 +181,114 @@ body{
         145px 170px 0 0 saddlebrown,
         305px 170px 0 0 saddlebrown;
 }
-
 .puppy::after {
-    content: '';
-    margin-left: 235px;
-    margin-top: 240px;
-    border-radius: 37% 37% 0 0;
-    border-left: 13px solid transparent;
-    border-right: 13px solid transparent;
-    border-top: 20px solid rgb(53, 30, 10, 0.9);
-    position: absolute;
+  content: '';
+  margin-left: 235px;
+  margin-top: 240px;
+  border-radius: 37% 37% 0 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 20px solid rgb(53, 30, 10, 0.9);
+  position: absolute;
 }
 
 /* Avatar Expressions */
-
 .neutral {
-    width: 55px;
-    height: 40px;
-    border-radius: 11%;
-    border-bottom: 3px solid black;
-    position: absolute;
-    margin-left: 125px;
-    margin-top: 250px;
+  width: 55px;
+  height: 40px;
+  border-radius: 11%;
+  border-bottom: 3px solid black;
+  position: absolute;
+  margin-left: 125px;
+  margin-top: 250px;
 }
-
 .neutral::before {
-    content: '';
-    width: 30px;
-    height: 10px;
-    border-width: 3px 0 0 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  border-width: 3px 0 0 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 50% 6%;
-    position: absolute;
-    margin-left: -20px;
-    margin-top: -35px;
+  border-radius: 50% 50% 50% 6%;
+  position: absolute;
+  margin-left: -20px;
+  margin-top: -35px;
 }
-
 .neutral::after {
-    content: '';
-    width: 30px;
-    height: 10px;
-    border-width: 3px 0 0 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  border-width: 3px 0 0 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 6% 50%;
-    position: absolute;
-    margin-left: 40px;
-    margin-top: -35px;
+  border-radius: 50% 50% 6% 50%;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: -35px;
 }
-
 .sad {
-    width: 50px;
-    height: 20px;
-    border-radius: 45%;
-    border-top: 4px solid black;
-    position: absolute;
-    margin-left: 125px;
-    margin-top: 280px;
+  width: 50px;
+  height: 20px;
+  border-radius: 45%;
+  border-top: 4px solid black;
+  position: absolute;
+  margin-left: 125px;
+  margin-top: 280px;
 }
-
 .sad::before {
-    content: '';
-    width: 30px;
-    height: 10px;
-    border-width: 0 0 3px 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  border-width: 0 0 3px 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 50% 6%;
-    position: absolute;
-    margin-left: -20px;
-    margin-top: -82px;
+  border-radius: 50% 50% 50% 6%;
+  position: absolute;
+  margin-left: -20px;
+  margin-top: -82px;
 }
-
 .sad::after {
-    content: '';
-    width: 30px;
-    height: 10px;
-    border-width: 0 0 3px 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  border-width: 0 0 3px 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 6% 50%;
-    position: absolute;
-    margin-left: 40px;
-    margin-top: -82px;
+  border-radius: 50% 50% 6% 50%;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: -82px;
 }
-
 .happy {
-    width: 50px;
-    height: 50px;
-    border-radius: 45%;
-    border-bottom: 4px solid black;
-    position: absolute;
-    margin-left: 125px;
-    margin-top: 230px;
+  width: 50px;
+  height: 50px;
+  border-radius: 45%;
+  border-bottom: 4px solid black;
+  position: absolute;
+  margin-left: 125px;
+  margin-top: 230px;
 }
-
 .happy::before {
-    content: '';
-    width: 30px;
-    height: 20px;
-    border-width: 3px 0 0 0;
+  content: '';
+  width: 30px;
+  height: 20px;
+  border-width: 3px 0 0 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 50% 6%;
-    position: absolute;
-    margin-left: -20px;
-    margin-top: -20px;
+  border-radius: 50% 50% 50% 6%;
+  position: absolute;
+  margin-left: -20px;
+  margin-top: -20px;
 }
-
 .happy::after {
-    content: '';
-    width: 30px;
-    height: 20px;
-    border-width: 3px 0 0 0;
+  content: '';
+  width: 30px;
+  height: 20px;
+  border-width: 3px 0 0 0;
 	border-style:solid;
 	border-color: black;
-    border-radius: 50% 50% 6% 50%;
-    position: absolute;
-    margin-left: 40px;
-    margin-top: -20px;
+  border-radius: 50% 50% 6% 50%;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: -20px;
 }
