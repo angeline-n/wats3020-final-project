@@ -46,38 +46,30 @@ class Character{
 
 // Tile Types
 
-class BadTile{
-  constructor(){
-    this.name = character.name;
-    this.message = game.message;
-  }
-
-  displayMessage(){
-    this.message.innerHTML = `${this.name} found a trap!`;
-    character.lives--;
-    checkEndConditions();
-  }
-}
-
-
-class NeutralTile{
-  constructor(){
-    this.name = character.name;
-    this.message = game.message;
-  }
-
-  displayMessage(){
-    this.message.innerHTML = `${this.name} found nothing.`;
-  }
-}
-
-class WinningTile{
+class Tile{
   constructor(){
     this.name = character.name;
     this.goal = character.goal;
     this.message = game.message;
   }
+}
 
+class BadTile extends Tile{
+  displayMessage(){
+    character.lives--;
+    this.message.innerHTML = `<p>${this.name} found a trap!</p><p>Lives remaining: ${character.lives}</p>`;
+    checkEndConditions();
+  }
+}
+
+
+class NeutralTile extends Tile{
+  displayMessage(){
+    this.message.innerHTML = `<p>${this.name} found nothing.</p><p>Lives remaining: ${character.lives}</p>`;
+  }
+}
+
+class WinningTile extends Tile{
   displayMessage(){
     this.message.innerHTML = `${this.name} found the ${this.goal}!`;
   }
