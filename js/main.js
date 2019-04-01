@@ -51,12 +51,14 @@ class Tile{
     this.name = character.name;
     this.goal = character.goal;
     this.message = game.message;
+    this.avatarContainer = game.avatarContainer;
   }
 }
 
 class BadTile extends Tile{
   displayMessage(){
     character.lives--;
+    this.avatarContainer.innerHTML = `<div class="${character.avatar.value}"></div><div class="sad"></div>`
     this.message.innerHTML = `<p>${this.name} found a trap!</p><p>Lives remaining: ${character.lives}</p>`;
     checkEndConditions();
   }
@@ -65,13 +67,15 @@ class BadTile extends Tile{
 
 class NeutralTile extends Tile{
   displayMessage(){
+    this.avatarContainer.innerHTML = `<div class="${character.avatar.value}"></div><div class="neutral"></div>`
     this.message.innerHTML = `<p>${this.name} found nothing.</p><p>Lives remaining: ${character.lives}</p>`;
   }
 }
 
 class WinningTile extends Tile{
   displayMessage(){
-    this.message.innerHTML = `${this.name} found the ${this.goal}!`;
+    this.avatarContainer.innerHTML = `<div class="${character.avatar.value}"></div><div class="happy"></div>`
+    this.message.innerHTML = `<p>${this.name} found the ${this.goal}!</p>`;
   }
 }
 
@@ -85,7 +89,9 @@ class FarmGame{
     this.gameboard = document.querySelector('#gameboard');
     this.winScreen = document.querySelector('#win-screen');
     this.loseScreen = document.querySelector('#lose-screen');
+    this.avatarContainer = document.querySelector('#avatar-container');
     this.message = document.querySelector('#message');
+    this.gameplay = document.querySelector('#gameplay');
 
 
     this.gameState = [
@@ -166,7 +172,8 @@ class FarmGame{
   start(){
     this.gameboard.setAttribute('class', 'col-lg-6 col-xs');
     this.setUpBoard();
-    this.message.setAttribute('class', '');
+    this.gameplay.setAttribute('class', '');
+    this.avatarContainer.innerHTML = `<div class="${character.avatar.value}"></div><div class="neutral"></div>`;
   }
   
 
@@ -182,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function(event){
     character = new Character();
     applyEventListeners();
     startButton.setAttribute('class','hidden');
-    character.characterMaker.setAttribute('class','');
+    character.characterMaker.setAttribute('class','row');
     character.avatarChosen.setAttribute('class','puppy');
     character.expression.setAttribute('class','neutral');
   });
