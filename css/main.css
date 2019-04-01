@@ -10,9 +10,10 @@ body{
 }
 
 /* Tiles */
+
 #gameboard {
-  background-color: rgba(253, 255, 252, 0.1);
   padding: 0;
+  margin-right: 4rem;
 }
 #gameboard .row div {
   text-align: center;
@@ -21,19 +22,29 @@ body{
   width: 33%;
 }
 .tile {
-  background: rgba(33, 34, 32);
+  background-image: url('../images/grass.png'); /* courtesy of background-tiles.com */
   width: 100%;
   min-width: 75px;
   height: 100%;
   min-height: 75px;
-  border: 1px solid blue;
+  border: 1px solid gray;
   display: inline-block;
   font-size: 5rem;
   cursor: pointer;
 }
 .tile:hover {
-  background: rgba(65, 77, 60, 0.1);
+  background-image: url('../images/grass-hover.png');
 }
+
+/* Character Maker 
+.character-image {
+  margin-left: 20rem;
+}
+
+.character-options {
+  margin-left: 20rem;
+}
+*/
 
 /* Bunny Avatar */
 .bunny {
@@ -113,7 +124,6 @@ body{
 }
 
 /* Avatar Expressions */
-
 
 .neutral {
     width: 55px;
