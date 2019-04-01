@@ -130,7 +130,6 @@ class FarmGame{
     this.placeBadTiles();
     this.placeNeutralTiles();
     this.setUpTileListeners();
-    console.log(this.gameState);
   }
 
   placeWinningTile(){
@@ -184,6 +183,8 @@ class FarmGame{
 
 // Create Character
 document.addEventListener('DOMContentLoaded', function(event){
+  listenReplayNew();
+  listenReplaySame();
   let startButton = document.querySelector('#start-button');
   startButton.addEventListener('click', function(event){
     character = new Character();
@@ -211,25 +212,22 @@ function handleMove(event){
   } else {
       validMove = true;
       if(game.gameState[tile_x][tile_y] === winner){
-        console.log(`winner`);
         winner.displayMessage();
+        game.winScreen.setAttribute('class','shown');
       }else if (game.gameState[tile_x][tile_y] === badTile1 || game.gameState[tile_x][tile_y] === badTile2 || game.gameState[tile_x][tile_y] === badTile3){
-        console.log(`bad`);
         currentBadTile = game.gameState[tile_x][tile_y];
         currentBadTile.displayMessage();
       }else{
         game.gameState[tile_x][tile_y].displayMessage();
-        console.log(`neutral`);
       }
       game.gameState[tile_x][tile_y] = 'checked';
       event.target.setAttribute('class', 'tile fas fa-times');
-      console.log(`${game.gameState}`);
   }
 }
 
 function checkEndConditions(){
   if (character.lives === 0){
-    console.log(`game over`);
+    game.loseScreen.setAttribute('class','shown');
   } else{
     return;
   }
@@ -239,9 +237,38 @@ function checkEndConditions(){
 function applyEventListeners(){
   let inputs = document.querySelectorAll('input, select, textarea');
   for (input of inputs){
-      input.addEventListener("change", function(event){
+      input.addEventListener('change', function(event){
           character.setAvatar();
       })
   }
 }
 
+// Replay
+function listenReplaySame(){
+  let inputs = document.querySelectorAll('.replay-same');
+  for (input of inputs){
+    input.addEventListener('click', function(event){
+      game.winScreen.setAttribute('class','hidden');
+      game.loseScreen.setAttribute('class','hidden');
+      game.message.innerHTML = `<p>Select a tile.</p>`;
+      character.lives = 3;
+      game = new FarmGame;
+      game.start();
+    })
+  }
+}
+
+function listenReplayNew(){
+  let inputs = document.querySelectorAll('.replay-new');
+  for (input of inputs){
+    input.addEventListener('click', function(event){
+      game.winScreen.setAttribute('class','hidden');
+      game.loseScreen.setAttribute('class','hidden');
+      game.gameboard.setAttribute('class','col hidden');
+      game.message.innerHTML = `<p>Select a tile.</p>`;
+      game.gameplay.setAttribute('class', 'col hidden');
+      character = new Character;
+      character.characterMaker.setAttribute('class','row');
+    })
+  }
+}
