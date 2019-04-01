@@ -49,7 +49,7 @@ class Character{
 class BadTile{
   constructor(){
     this.name = character.name;
-    this.message = document.querySelector('#message');
+    this.message = game.message;
   }
 
   displayMessage(){
@@ -63,7 +63,7 @@ class BadTile{
 class NeutralTile{
   constructor(){
     this.name = character.name;
-    this.message = document.querySelector('#message');
+    this.message = game.message;
   }
 
   displayMessage(){
@@ -75,7 +75,7 @@ class WinningTile{
   constructor(){
     this.name = character.name;
     this.goal = character.goal;
-    this.message = document.querySelector('#message')
+    this.message = game.message;
   }
 
   displayMessage(){
@@ -93,6 +93,7 @@ class FarmGame{
     this.gameboard = document.querySelector('#gameboard');
     this.winScreen = document.querySelector('#win-screen');
     this.loseScreen = document.querySelector('#lose-screen');
+    this.message = document.querySelector('#message');
 
 
     this.gameState = [
@@ -171,8 +172,9 @@ class FarmGame{
   }
 
   start(){
-    this.gameboard.setAttribute('class', 'col-lg-9 col-xs');
+    this.gameboard.setAttribute('class', 'col-lg-6 col-xs');
     this.setUpBoard();
+    this.message.setAttribute('class', '');
   }
   
 
@@ -198,7 +200,6 @@ document.addEventListener('DOMContentLoaded', function(event){
 let playGame = document.querySelector('#play-game');
 playGame.addEventListener('click', function(event){
   character.characterMaker.setAttribute('class','hidden');
-  playGame.setAttribute('class','hidden');
   game = new FarmGame();
   game.start();
 });
@@ -222,6 +223,7 @@ function handleMove(event){
         console.log(`neutral`);
       }
       game.gameState[tile_x][tile_y] = 'checked';
+      event.target.setAttribute('class', 'tile fas fa-times');
       console.log(`${game.gameState}`);
   }
 }
