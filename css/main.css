@@ -3,10 +3,21 @@
 body{
   width: 90%;
   margin: auto;
+  font-family: 'Reem Kufi', sans-serif;
 }
 
 .hidden {
     display: none;
+}
+
+.shown {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vw;
+  z-index: 1000;
 }
 
 /* Tiles */
@@ -54,6 +65,23 @@ body{
 
 #message{
   margin-top: 22rem;
+  font-family: 'Source Code Pro', monospace;
+}
+
+#win-screen .container{
+  background: #CDF6F6;
+  color: rgba(10, 46, 54, 1);
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#lose-screen .container {
+  background:#A3AF9E;
+  color: rgba(10, 46, 54, 1);
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 /* Bunny Avatar */
